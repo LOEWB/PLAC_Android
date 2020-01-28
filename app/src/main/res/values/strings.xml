@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PLAC_Android</string>
+    <string name="certificate_title">Carte grise</string>
 </resources>
