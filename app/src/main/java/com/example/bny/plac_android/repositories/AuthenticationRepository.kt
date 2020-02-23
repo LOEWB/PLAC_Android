@@ -8,10 +8,12 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
+import javax.inject.Inject
 import javax.inject.Singleton
 
 //@Singleton
-class AuthenticationRepository(context: Context) {
+
+class AuthenticationRepository @Inject constructor(context: Context) {
 
     val TAG = "OK_BOOMER"
 
