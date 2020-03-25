@@ -15,4 +15,11 @@ sealed class Result<out T : Any> {
             is Error -> "Error[exception=$exception]"
         }
     }
+
+    fun data(): Any {
+        return when (this) {
+            is Success<*> -> data
+            is Error -> exception
+        }
+    }
 }

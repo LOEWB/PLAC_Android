@@ -8,6 +8,7 @@ import android.support.annotation.StringRes
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
@@ -15,14 +16,27 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.bny.plac_android.R
-
+import com.example.bny.plac_android.di.ApplicationComponent
+import com.example.bny.plac_android.di.DaggerApplicationComponent
+import com.example.bny.plac_android.services.AuthenticationService
+import dagger.Module
+import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
 
+    @Inject
+    lateinit var authServ: AuthenticationService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // !!!!
+        DaggerApplicationComponent.builder()
+                .build().injectLogin(this)
+//        authServ.getToken("fezf", "ouga", this)
+        // !!!!
 
         setContentView(R.layout.activity_login)
 
@@ -31,8 +45,8 @@ class LoginActivity : AppCompatActivity() {
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
 
-        loginViewModel = ViewModelProviders.of(this, LoginViewModelFactory())
-                .get(LoginViewModel::class.java)
+
+        loginViewModel = LoginViewModel()
 
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
@@ -57,11 +71,12 @@ class LoginActivity : AppCompatActivity() {
             }
             if (loginResult.success != null) {
                 updateUiWithUser(loginResult.success)
-            }
-            setResult(Activity.RESULT_OK)
+                setResult(Activity.RESULT_OK)
 
-            //Complete and destroy login activity once successful
-            finish()
+                //Complete and destroy login activity once successful
+                finish()
+            }
+
         })
 
         username.afterTextChanged {
@@ -84,7 +99,9 @@ class LoginActivity : AppCompatActivity() {
                     EditorInfo.IME_ACTION_DONE ->
                         loginViewModel.login(
                                 username.text.toString(),
-                                password.text.toString()
+                                password.text.toString(),
+                                this@LoginActivity,
+                                this@LoginActivity.authServ
                         )
                 }
                 false
@@ -92,7 +109,7 @@ class LoginActivity : AppCompatActivity() {
 
             login.setOnClickListener {
                 loading.visibility = View.VISIBLE
-                loginViewModel.login(username.text.toString(), password.text.toString())
+                loginViewModel.login(username.text.toString(), password.text.toString(), this@LoginActivity, this@LoginActivity.authServ)
             }
         }
     }

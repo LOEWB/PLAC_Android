@@ -9,6 +9,7 @@ import com.example.bny.plac_android.di.DaggerApplicationComponent
 import com.example.bny.plac_android.di.MainActivityModule
 import com.example.bny.plac_android.services.AuthenticationService
 import com.example.bny.plac_android.ui.login.LoginActivity
+import dagger.android.AndroidInjection.inject
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -19,12 +20,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+//
+//        val component: ApplicationComponent = DaggerApplicationComponent.builder()
+//                .mainActivityModule(MainActivityModule(this)).build()
 
-        val component: ApplicationComponent = DaggerApplicationComponent.builder()
-                .mainActivityModule(MainActivityModule(this)).build()
-
-        component.inject(this)
-        Log.d("PLAC_APP", "msg: " + authServ.getToken())
+//        DaggerApplicationComponent.builder().build().inject(this)
+//        Log.d("PLAC_APP", "msg: " + authServ.getToken(this))
 
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
