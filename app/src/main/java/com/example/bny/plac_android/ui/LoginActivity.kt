@@ -1,14 +1,13 @@
-package com.example.bny.plac_android.ui.login
+package com.example.bny.plac_android.ui
 
 import android.app.Activity
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
@@ -16,10 +15,10 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.bny.plac_android.R
-import com.example.bny.plac_android.di.ApplicationComponent
 import com.example.bny.plac_android.di.DaggerApplicationComponent
 import com.example.bny.plac_android.services.AuthenticationService
-import dagger.Module
+import com.example.bny.plac_android.ui.login.LoggedInUserView
+import com.example.bny.plac_android.ui.login.LoginViewModel
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
@@ -74,7 +73,8 @@ class LoginActivity : AppCompatActivity() {
                 setResult(Activity.RESULT_OK)
 
                 //Complete and destroy login activity once successful
-                finish()
+                val intent = Intent(this, CertificatesActivity::class.java)
+                startActivity(intent)
             }
 
         })

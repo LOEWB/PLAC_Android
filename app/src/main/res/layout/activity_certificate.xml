@@ -4,4 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.bny.plac_android.ui.MainActivity"/>
+    tools:context="com.example.bny.plac_android.ui.CertificatesActivity">
+
+    <ListView
+        android:id="@+id/certif_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dividerHeight="1dp" />
+</android.support.constraint.ConstraintLayout>

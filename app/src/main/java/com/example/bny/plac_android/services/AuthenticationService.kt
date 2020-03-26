@@ -30,6 +30,12 @@ class AuthenticationService @Inject constructor(val rep: AuthenticationRepositor
             Log.d("OK_BOOMER", "token in rep")
         }
     }
+    fun getToken(callback: TokenCallback) {
+        if(::token.isInitialized) {
+            callback.onSuccessToken(Result.Success(token))
+            Log.d("OK_BOOMER", "token in mem")
+        }
+    }
 
     fun getUserInfos(token: String, context: Context, callback: UserInfosCallback) {
         if(::jsonUser.isInitialized)

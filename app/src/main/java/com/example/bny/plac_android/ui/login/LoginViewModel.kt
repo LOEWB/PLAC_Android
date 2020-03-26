@@ -59,7 +59,7 @@ class LoginViewModel : ViewModel(), TokenCallback, UserInfosCallback {
 
     // A placeholder password validation check
     private fun isPasswordValid(password: String): Boolean {
-        return password.length > 5
+        return password.length > 2
     }
 
     // Called at token retrieve

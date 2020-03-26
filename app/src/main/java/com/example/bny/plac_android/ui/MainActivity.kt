@@ -1,15 +1,10 @@
-package com.example.bny.plac_android
+package com.example.bny.plac_android.ui
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.example.bny.plac_android.di.ApplicationComponent
-import com.example.bny.plac_android.di.DaggerApplicationComponent
-import com.example.bny.plac_android.di.MainActivityModule
+import com.example.bny.plac_android.R
 import com.example.bny.plac_android.services.AuthenticationService
-import com.example.bny.plac_android.ui.login.LoginActivity
-import dagger.android.AndroidInjection.inject
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
